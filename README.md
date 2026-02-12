@@ -1,3 +1,3 @@
 # mecs
-this is my golang ECS that i make for fun enjoy it break it and please tell me if (when) you find a bug
+this is my golang Entity Component System that i make for fun enjoy it break it and please tell me if (when) you find a bug
 and you invited to make forks of this ecs with more things i enjoy to see it
