@@ -4,11 +4,15 @@ import (
 	"reflect"
 )
 
+//Id you use to represend a single entity
 type EntityId int
+//function that you can register as system to the engine
 type System func(world *World)
+//interface you use to save and get components
 type Component any
-type eventType int
 
+type eventType int
+//this is all the events you can register your system into
 const (
 	_ = eventType(iota)
 	EventProgramStart
@@ -27,7 +31,7 @@ func nameOf(a any) string{
 	return points + t.Name()
 }
 
-// you need to keep every component of the same entity at the same position
+// every world is one instance of the engine
 type World struct {
 	components  map[string]*SparseSet[Component]
 	freeindexes []int
@@ -54,7 +58,7 @@ func (w *World) setComponent(index EntityId,component Component){
 	}
 	w.components[compname].Set(int(index),component)
 }
-
+//here you add system to the world and choose when you will update that system (Update,LateUpdate,Draw or when the program start)
 func (w *World) AddSystem(event_type eventType,function System){
 	if _,ok := w.systems[event_type];ok{
 		w.systems[event_type] = append(w.systems[event_type], function)
@@ -63,13 +67,13 @@ func (w *World) AddSystem(event_type eventType,function System){
 		w.systems[event_type][0] = function
 	}
 }
-
+//run all the systems that register on EventProgramStart
 func (w *World) Start(){
 	for i := range w.systems[EventProgramStart]{
 		w.systems[EventProgramStart][i](w)
 	}
 }
-
+//run all the systems from Update and LateUpdate and after that add and remove all the entity you ask for
 func (w *World) Update(){
 	for i := range w.systems[EventUpdate]{
 		w.systems[EventUpdate][i](w)
@@ -80,7 +84,7 @@ func (w *World) Update(){
 	w.removeEntitys()
 	w.addEntitysNow()
 }
-
+//run all the draw systems
 func (w *World) Draw(){
 	for i := range w.systems[EventDraw]{
 		w.systems[EventDraw][i](w)

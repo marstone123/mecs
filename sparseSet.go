@@ -1,5 +1,6 @@
 package mecs
 
+//this is the maximum of entitys my engine can run
 const MAXENTITYS = 1000_00
 
 type SparseSet[T any] struct {
