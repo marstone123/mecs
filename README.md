@@ -8,8 +8,9 @@ the code will look in the style of this
 package main
 
 import (
-    "fmt"
-    mecs "github.com/marstone123/mecs"
+	"fmt"
+
+	"github.com/marstone123/mecs"
 )
 
 type Position struct{
@@ -68,9 +69,10 @@ func sayHello(w *mecs.World){
 }
 
 func main(){
+	
     world := mecs.NewWorld()
 
-    world.AddEntity(&Position{0,0},&Velocity{0,0},Name{"Cool guy"})
+    world.AddEntityNow(&Position{0,0},&Velocity{0.2,0.2},Name{"Cool guy"})
 
     world.AddSystem(mecs.EventUpdate,updatePositionsWithVelocity)
     world.AddSystem(mecs.EventDraw,sayHello)
