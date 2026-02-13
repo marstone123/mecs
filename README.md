@@ -4,12 +4,13 @@ and you invited to make forks of this ecs with more things i enjoy to see it
 i try to made that similar to bevy in the way you code in it
 the code will look in the style of this
 
-'''go
+```go
 package main
 
 import (
-    "fmt"
-    mecs "github.com/marstone123/mecs"
+	"fmt"
+
+	"github.com/marstone123/mecs"
 )
 
 type Position struct{
@@ -49,7 +50,7 @@ func updatePositionsWithVelocity(w *mecs.World){
 }
 
 func sayHello(w *mecs.World){
-    peoples := w.GetAllComponents("Name").(Name)
+    peoples := w.GetAllComponents("Name")
     
     for i := range peoples.Components{
         fmt.Print("Hi my name is ",peoples.Components[i].(Name).string," ")
@@ -68,9 +69,10 @@ func sayHello(w *mecs.World){
 }
 
 func main(){
+	
     world := mecs.NewWorld()
 
-    world.AddEntity(&Position{0,0},&Velocity{0,0},Name{"Cool guy"})
+    world.AddEntityNow(&Position{0,0},&Velocity{0.2,0.2},Name{"Cool guy"})
 
     world.AddSystem(mecs.EventUpdate,updatePositionsWithVelocity)
     world.AddSystem(mecs.EventDraw,sayHello)
@@ -81,4 +83,4 @@ func main(){
         world.Draw()
     }
 }
-'''
+```
