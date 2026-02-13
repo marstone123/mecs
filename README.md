@@ -49,7 +49,7 @@ func updatePositionsWithVelocity(w *mecs.World){
 }
 
 func sayHello(w *mecs.World){
-    peoples := w.GetAllComponents("Name").(Name)
+    peoples := w.GetAllComponents("Name")
     
     for i := range peoples.Components{
         fmt.Print("Hi my name is ",peoples.Components[i].(Name).string," ")
