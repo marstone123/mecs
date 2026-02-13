@@ -4,7 +4,7 @@ and you invited to make forks of this ecs with more things i enjoy to see it
 i try to made that similar to bevy in the way you code in it
 the code will look in the style of this
 
-'''go
+```go
 package main
 
 import (
@@ -81,4 +81,4 @@ func main(){
         world.Draw()
     }
 }
-'''
+```
