@@ -10,6 +10,7 @@ func (w *World) removeEntitys() {
 		for keys := range w.components {
 			w.components[keys].Remove(int(index))
 		}
+		w.freeindexes = append(w.freeindexes, index)
 	}
 	w.toRemove = make([]int, 0)
 }
