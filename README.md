@@ -26,15 +26,15 @@ type Name struct{string}
 
 func updatePositionsWithVelocity(w *mecs.World){
     //i ask for all the position i can change
-    positions := w.GetAllComponents("*Position")
+    positions := w.GetEntitysWith("*Position")
 
     //run for on all the positions
     for i := range positions.Components{
 
         //the entity id of the correct component
-        entityID := positions.GetEntityByIndex(i)
+        entityID := positions.Get(i)
 
-        //i chack if the entity of the correct 
+        //i check if the entity of the correct 
         if w.HasComponent(entityID,"*Velocity"){
             //get a pointer to the velocity of this entity
             velocity_pointer := w.GetComponent(entityID,"*Velocity").(*Velocity)
@@ -50,12 +50,11 @@ func updatePositionsWithVelocity(w *mecs.World){
 }
 
 func sayHello(w *mecs.World){
-    peoples := w.GetAllComponents("Name")
+    peoples := w.GetEntitysWith("Name")
     
-    for i := range peoples.Components{
-        fmt.Print("Hi my name is ",peoples.Components[i].(Name).string," ")
-
-        entityID := peoples.GetEntityByIndex(i)
+    for i := range peoples.Len(){
+        entityID := peoples.Get(i)
+        fmt.Print("Hi my name is ",world.GetComponent(entityID,"Name").(Name).string," ")
 
         if w.HasComponent(entityID,"*Velocity"){
             fmt.Print("and my velocity is ",*(w.GetComponent(entityID,"*Velocity").(*Velocity))," ")
