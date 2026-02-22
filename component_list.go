@@ -41,4 +41,3 @@ func (w *World) HasComponent(entity EntityId, component_type string) bool {
 	}
 	return w.components[component_type].Has(int(entity))
 }
-

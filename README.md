@@ -29,7 +29,7 @@ func updatePositionsWithVelocity(w *mecs.World){
     positions := w.GetEntitysWith("*Position")
 
     //run for on all the positions
-    for i := range positions.Components{
+    for i := range positions.Len(){
 
         //the entity id of the correct component
         entityID := positions.Get(i)
@@ -40,7 +40,7 @@ func updatePositionsWithVelocity(w *mecs.World){
             velocity_pointer := w.GetComponent(entityID,"*Velocity").(*Velocity)
 
             //get a pointer to the correct position as *Position
-            position_pointer := positions.Components[i].(*Position)
+            position_pointer := positions.GetComponent(entityID,"*Position").(*Position)
 
             //add the velocity to the position
             position_pointer.x += velocity_pointer.x
